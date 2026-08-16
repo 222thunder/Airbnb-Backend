@@ -1,3 +1,4 @@
+<% if (typeof isLoggedIn !== 'undefined' && isLoggedIn && typeof userType !== 'undefined' && userType === 'guest') { %>
 <% const isFav = typeof favoriteIds !== 'undefined' &&
 Array.isArray(favoriteIds) &&
 favoriteIds.some((fav) => String(fav._id || fav) === String(home._id)); %>
@@ -22,3 +23,4 @@ favoriteIds.some((fav) => String(fav._id || fav) === String(home._id)); %>
     </svg>
   </button>
 </form>
+<% } %>

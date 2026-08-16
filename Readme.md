@@ -21,6 +21,16 @@ A server-rendered Airbnb-style home-sharing application built with Node.js, Expr
 - **Host**: add a home (`/host/add-home`), list own homes, edit, delete (protected — redirects to `/homes` if not a logged-in host)
 - **Uploads**: image-only file uploads via multer, served from `/uploads`
 
+## Screenshots
+
+| Home | Homes | Home details |
+| --- | --- | --- |
+| ![screenshot-1](screenshots/screenshot-1.png) | ![screenshot-2](screenshots/screenshot-2.png) | ![screenshot-3](screenshots/screenshot-3.png) |
+
+| Favorites / Bookings | Host add-home |
+| --- | --- |
+| ![screenshot-4](screenshots/screenshot-4.png) | ![screenshot-5](screenshots/screenshot-5.png) |
+
 ## Getting Started
 
 ### Prerequisites

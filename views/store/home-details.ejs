@@ -504,12 +504,14 @@
                 </div>
               </div>
 
+              <% if (typeof userType === 'undefined' || userType !== 'host') { %>
               <button
                 type="button"
                 class="w-full rounded-xl bg-[#FF5A5F] py-3.5 text-center text-sm font-bold text-white shadow-md transition hover:bg-[#e54e52] active:scale-98 cursor-pointer"
               >
                 Reserve Now
               </button>
+              <% } %>
             </form>
 
             <!-- Add / Remove Favorites Form -->
