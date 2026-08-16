@@ -106,7 +106,7 @@
           class="md:col-span-2 aspect-4/3 md:aspect-auto h-full min-h-75 overflow-hidden bg-rose-100"
         >
           <img
-            src="<%= typeof home !== 'undefined' && home.photo ? home.photo : 'https://images.pexels.com/photos/16047313/pexels-photo-16047313.jpeg' %>"
+            src="<%= typeof home !== 'undefined' && home.photo ? '/' + home.photo : 'https://images.pexels.com/photos/16047313/pexels-photo-16047313.jpeg' %>"
             alt="<%= typeof home !== 'undefined' && home.houseName ? home.houseName : 'Home Image' %>"
             class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
           />

@@ -113,6 +113,7 @@
                 />
               </svg>
               <span
+                id="file-chosen"
                 class="text-sm font-medium text-gray-700 group-hover:text-[#FF5A5F]"
               >
                 Upload house photo
@@ -153,5 +154,17 @@
         </form>
       </div>
     </main>
+    <script>
+      const fileInput = document.getElementById('photo');
+      const fileChosen = document.getElementById('file-chosen');
+
+      fileInput.addEventListener('change', function() {
+        if (this.files && this.files.length > 0) {
+          fileChosen.textContent = this.files[0].name;
+        } else {
+          fileChosen.textContent = 'Upload house photo';
+        }
+      });
+    </script>
   </body>
 </html>
