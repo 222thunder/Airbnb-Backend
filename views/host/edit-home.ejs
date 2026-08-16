@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=pageTitle%></title>
+    <link href="/output.css" rel="stylesheet" />
+  </head>
+  <body
+    class="flex min-h-screen flex-col bg-linear-to-br from-rose-50 via-white to-rose-100 font-sans"
+  >
+    <%- include('../partials/nav') %>
+
+    <main class="flex flex-1 items-center justify-center px-6 py-16">
+      <div
+        class="w-full max-w-lg rounded-2xl border border-gray-150 bg-white p-8 shadow-sm"
+      >
+        <h1 class="text-2xl font-bold tracking-tight text-gray-900">
+          <%=pageTitle%>
+        </h1>
+        <p class="mt-1.5 text-sm text-gray-500">
+          Tell us a little about your place to get started.
+        </p>
+
+        <% const isEditing = typeof editing !== 'undefined' && editing; %>
+        <form
+          action="<%= isEditing ? '/host/edit-home/' + home._id  : '/host/add-home' %>"
+          method="POST"
+          class="mt-8 flex flex-col gap-5"
+          enctype="multipart/form-data"
+        >
+          <div class="flex flex-col gap-1.5">
+            <label for="housename" class="text-sm font-medium text-gray-700">
+              Home name
+            </label>
+            <input
+              type="text"
+              id="housename"
+              name="housename"
+              placeholder="e.g. Cozy cabin by the lake"
+              value="<%= isEditing && typeof home !== 'undefined' ? home.houseName : '' %>"
+              class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 transition focus:border-[#FF5A5F] focus:outline-none focus:ring-2 focus:ring-[#FF5A5F]/20"
+            />
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label for="houseprice" class="text-sm font-medium text-gray-700">
+              Price per night
+            </label>
+            <input
+              type="number"
+              id="houseprice"
+              name="houseprice"
+              min="0"
+              step="0.01"
+              placeholder="e.g. 120"
+              value="<%= isEditing && typeof home !== 'undefined' ? home.housePrice : '' %>"
+              class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 transition focus:border-[#FF5A5F] focus:outline-none focus:ring-2 focus:ring-[#FF5A5F]/20"
+            />
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label
+              for="houselocation"
+              class="text-sm font-medium text-gray-700"
+            >
+              Location
+            </label>
+            <input
+              type="text"
+              id="houselocation"
+              name="houselocation"
+              placeholder="e.g. Seattle, Washington"
+              value="<%= isEditing && typeof home !== 'undefined' ? home.houseLocation : '' %>"
+              class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 transition focus:border-[#FF5A5F] focus:outline-none focus:ring-2 focus:ring-[#FF5A5F]/20"
+            />
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label for="houserating" class="text-sm font-medium text-gray-700">
+              Rating
+            </label>
+            <input
+              type="number"
+              id="houserating"
+              name="houserating"
+              min="0"
+              max="5"
+              step="0.1"
+              placeholder="e.g. 4.8"
+              value="<%= isEditing && typeof home !== 'undefined' ? home.houseRating : '' %>"
+              class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 transition focus:border-[#FF5A5F] focus:outline-none focus:ring-2 focus:ring-[#FF5A5F]/20"
+            />
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label class="text-sm font-medium text-gray-700">Photo</label>
+            <label
+              for="photo"
+              class="group flex cursor-pointer flex-col items-center justify-center gap-1.5 rounded-xl border-2 border-dashed border-gray-300 bg-gray-50/70 px-4 py-7 text-center transition hover:border-[#FF5A5F] hover:bg-rose-50/40"
+            >
+              <svg
+                class="h-6 w-6 text-gray-400 transition group-hover:text-[#FF5A5F]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                />
+              </svg>
+              <span
+                class="text-sm font-medium text-gray-700 group-hover:text-[#FF5A5F]"
+              >
+                Upload house photo
+              </span>
+              <span class="text-xs text-gray-400">JPG, JPEG or PNG</span>
+              <input
+                type="file"
+                name="photo"
+                id="photo"
+                accept=".jpg, .jpeg, .png"
+                class="hidden"
+              />
+            </label>
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label
+              for="houseDescription"
+              class="text-sm font-medium text-gray-700"
+            >
+              Description
+            </label>
+            <textarea
+              id="houseDescription"
+              name="houseDescription"
+              rows="4"
+              placeholder="Describe what makes your place special..."
+              class="w-full resize-none rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 transition focus:border-[#FF5A5F] focus:outline-none focus:ring-2 focus:ring-[#FF5A5F]/20"
+            >
+<%= isEditing && typeof home !== 'undefined' ? home.houseDescription : '' %></textarea>
+          </div>
+
+          <input
+            type="submit"
+            value="<%= isEditing ? 'Update Home' : 'Add Home' %>"
+            class="mt-1 w-full cursor-pointer rounded-full bg-[#FF5A5F] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#e54e52] active:scale-[0.98]"
+          />
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

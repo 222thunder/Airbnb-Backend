@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      <%= typeof pageTitle !== 'undefined' ? pageTitle : 'Sign Up - Airbnb' %>
+    </title>
+    <link href="/output.css" rel="stylesheet" />
+  </head>
+  <body
+    class="flex min-h-screen flex-col bg-linear-to-br from-rose-50 via-white to-rose-100 font-sans"
+  >
+    <%- include('../partials/nav') %>
+
+    <main class="flex flex-1 items-center justify-center px-6 py-12">
+      <div
+        class="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl border border-gray-150 transition-all duration-300"
+      >
+        <!-- Header -->
+        <div class="text-center mb-6">
+          <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">
+            Create an Account
+          </h1>
+          <p class="mt-2 text-sm text-gray-500">
+            Join Airbnb to book unique places and host travelers
+          </p>
+        </div>
+
+        <!-- Warning / Error Message Banner -->
+        <% if (typeof errorMessage !== 'undefined' && errorMessage &&
+        (Array.isArray(errorMessage) ? errorMessage.length > 0 : true)) { %>
+        <div
+          class="mb-6 rounded-xl border border-rose-200 bg-rose-50/90 p-4 text-sm text-rose-900 shadow-xs"
+          role="alert"
+        >
+          <div class="flex items-start gap-3">
+            <svg
+              class="h-5 w-5 shrink-0 text-[#FF5A5F] mt-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+            <div class="flex-1">
+              <h3 class="font-bold text-rose-900">
+                Please check the following errors:
+              </h3>
+              <% if (Array.isArray(errorMessage)) { %>
+              <ul
+                class="mt-2 list-disc list-inside space-y-1 text-xs text-rose-800"
+              >
+                <% errorMessage.forEach(function(msg) { %>
+                <li><%= msg %></li>
+                <% }); %>
+              </ul>
+              <% } else { %>
+              <p class="mt-1 text-xs text-rose-800"><%= errorMessage %></p>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <% } %>
+
+        <!-- Signup Form -->
+        <form action="/signup" method="POST" class="flex flex-col gap-4">
+          <!-- Name Inputs (Grid for First & Last Name) -->
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label
+                for="firstName"
+                class="block text-sm font-medium text-gray-700 mb-1.5"
+              >
+                First name
+              </label>
+              <input
+                id="firstName"
+                type="text"
+                name="firstName"
+                value="<%= typeof oldInput !== 'undefined' && oldInput.firstName ? oldInput.firstName : '' %>"
+                required
+                placeholder="John"
+                class="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-[#FF5A5F] focus:outline-none focus:ring-2 focus:ring-[#FF5A5F]/30 transition-all"
+              />
+            </div>
+            <div>
+              <label
+                for="lastName"
+                class="block text-sm font-medium text-gray-700 mb-1.5"
+              >
+                Last name
+              </label>
+              <input
+                id="lastName"
+                type="text"
+                name="lastName"
+                value="<%= typeof oldInput !== 'undefined' && oldInput.lastName ? oldInput.lastName : '' %>"
+                placeholder="Doe"
+                class="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-[#FF5A5F] focus:outline-none focus:ring-2 focus:ring-[#FF5A5F]/30 transition-all"
+              />
+            </div>
+          </div>
+
+          <!-- Email Input -->
+          <div>
+            <label
+              for="email"
+              class="block text-sm font-medium text-gray-700 mb-1.5"
+            >
+              Email address
+            </label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              value="<%= typeof oldInput !== 'undefined' && oldInput.email ? oldInput.email : '' %>"
+              required
+              placeholder="name@example.com"
+              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-[#FF5A5F] focus:outline-none focus:ring-2 focus:ring-[#FF5A5F]/30 transition-all"
+            />
+          </div>
+
+          <!-- Password Input -->
+          <div>
+            <label
+              for="password"
+              class="block text-sm font-medium text-gray-700 mb-1.5"
+            >
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              required
+              placeholder="Create a password"
+              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-[#FF5A5F] focus:outline-none focus:ring-2 focus:ring-[#FF5A5F]/30 transition-all"
+            />
+          </div>
+
+          <!-- Confirm Password Input -->
+          <div>
+            <label
+              for="confirmPassword"
+              class="block text-sm font-medium text-gray-700 mb-1.5"
+            >
+              Confirm password
+            </label>
+            <input
+              id="confirmPassword"
+              type="password"
+              name="confirmPassword"
+              required
+              placeholder="Confirm your password"
+              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-[#FF5A5F] focus:outline-none focus:ring-2 focus:ring-[#FF5A5F]/30 transition-all"
+            />
+          </div>
+
+          <!-- User Type Selection (Host / Guest) -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5">
+              I want to register as
+            </label>
+            <div class="flex items-center gap-6 pt-0.5">
+              <label
+                class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer select-none"
+              >
+                <input
+                  type="radio"
+                  name="userType"
+                  value="guest"
+                  class="h-4 w-4 text-[#FF5A5F] focus:ring-[#FF5A5F] accent-[#FF5A5F]"
+                />
+                <span>Guest</span>
+              </label>
+              <label
+                class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer select-none"
+              >
+                <input
+                  type="radio"
+                  name="userType"
+                  value="host"
+                  class="h-4 w-4 text-[#FF5A5F] focus:ring-[#FF5A5F] accent-[#FF5A5F]"
+                />
+                <span>Host</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Terms Checkbox -->
+          <div class="flex items-start gap-2 pt-1">
+            <input
+              id="terms"
+              type="checkbox"
+              name="terms"
+              required
+              class="h-4 w-4 mt-0.5 rounded border-gray-300 text-[#FF5A5F] focus:ring-[#FF5A5F] accent-[#FF5A5F]"
+            />
+            <label for="terms" class="text-xs text-gray-600 select-none">
+              I agree to the
+              <a href="#" class="text-[#FF5A5F] hover:underline"
+                >Terms of Service</a
+              >
+              and
+              <a href="#" class="text-[#FF5A5F] hover:underline"
+                >Privacy Policy</a
+              >
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="mt-2 w-full cursor-pointer rounded-lg bg-[#FF5A5F] px-4 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-[#e54e52] hover:shadow-lg active:scale-98"
+          >
+            Create Account
+          </button>
+        </form>
+
+        <!-- Divider -->
+        <div class="relative my-6">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-200"></div>
+          </div>
+          <div class="relative flex justify-center text-xs uppercase">
+            <span class="bg-white px-2 text-gray-400 font-medium">or</span>
+          </div>
+        </div>
+
+        <!-- Login Link -->
+        <p class="text-center text-sm text-gray-500">
+          Already have an account?
+          <a href="/login" class="font-semibold text-[#FF5A5F] hover:underline">
+            Log in
+          </a>
+        </p>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-150 mt-auto py-8">
+      <div
+        class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500 gap-4"
+      >
+        <div>
+          &copy;
+          <%= new Date().getFullYear() %>
+          Airbnb, Inc.
+        </div>
+        <div class="flex gap-6">
+          <a href="#" class="hover:underline">Privacy</a>
+          <a href="#" class="hover:underline">Terms</a>
+          <a href="#" class="hover:underline">Sitemap</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

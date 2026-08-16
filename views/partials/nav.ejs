@@ -1,0 +1,169 @@
+<!-- Navigation Bar -->
+<header
+  class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-150 shadow-xs w-full"
+>
+  <div
+    class="max-w-7xl mx-auto flex items-center justify-between w-full px-6 py-3.5"
+  >
+    <!-- Brand Logo Text -->
+    <a
+      href="/"
+      class="text-3xl font-black tracking-tighter text-[#FF5A5F] transition-transform duration-200 hover:scale-102 active:scale-95 shrink-0"
+    >
+      airbnb
+    </a>
+
+    <% if (isLoggedIn) { %>
+    <!-- Navigation Links (Desktop, centered) -->
+    <div
+      class="hidden sm:flex items-center gap-1.5 sm:gap-2 flex-1 justify-center"
+    >
+      <% if(userType && userType == "guest") {%>
+      <a
+        href="/homes"
+        class="rounded-full px-4 py-2 text-sm font-semibold text-gray-700 transition-all duration-200 hover:bg-rose-50 hover:text-[#FF5A5F] active:scale-95"
+        >Home</a
+      >
+      <a
+        href="/favorite"
+        class="rounded-full px-4 py-2 text-sm font-semibold text-gray-700 transition-all duration-200 hover:bg-rose-50 hover:text-[#FF5A5F] active:scale-95"
+        >Favorites</a
+      >
+      <a
+        href="/bookings"
+        class="rounded-full px-4 py-2 text-sm font-semibold text-gray-700 transition-all duration-200 hover:bg-rose-50 hover:text-[#FF5A5F] active:scale-95"
+        >Bookings</a
+      >
+      <% }else{ %>
+      <a
+        href="/host/host-home-list"
+        class="rounded-full px-4 py-2 text-sm font-semibold text-gray-700 transition-all duration-200 hover:bg-rose-50 hover:text-[#FF5A5F] active:scale-95"
+        >Host List</a
+      >
+      <a
+        href="/host/add-home/?editing=false"
+        class="rounded-full px-4 py-2 text-sm font-semibold text-gray-700 transition-all duration-200 hover:bg-rose-50 hover:text-[#FF5A5F] active:scale-95"
+        >Add Home</a
+      >
+      <% } %>
+    </div>
+    <% } %>
+
+    <!-- Right Actions (Desktop): Login / Logout -->
+    <div class="hidden sm:flex items-center gap-2 shrink-0">
+      <% if (isLoggedIn) { %>
+      <form action="/logout" method="POST" class="inline">
+        <button
+          type="submit"
+          class="cursor-pointer rounded-full border-2 border-black px-5 py-2 text-sm font-bold text-black transition-all duration-200 hover:bg-gray-100 active:scale-95"
+        >
+          Logout
+        </button>
+      </form>
+      <% } else { %>
+      <a
+        href="/login"
+        class="rounded-full border-2 border-black px-5 py-2 text-sm font-bold text-black transition-all duration-200 hover:bg-gray-100 active:scale-95"
+        >Login</a
+      >
+      <% } %>
+    </div>
+
+    <!-- Hamburger Menu Button (Mobile) -->
+    <button
+      id="mobile-menu-btn"
+      class="sm:hidden flex items-center justify-center p-2 text-gray-700 hover:text-[#FF5A5F] focus:outline-none transition-colors"
+      aria-label="Toggle navigation menu"
+    >
+      <svg
+        class="w-7 h-7"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          id="menu-icon-path"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden sm:hidden absolute left-0 right-0 top-full border-t border-gray-150 bg-white/95 backdrop-blur-md shadow-lg rounded-b-2xl"
+  >
+    <div class="flex flex-col px-4 py-3 gap-1">
+      <% if (isLoggedIn) { %> <% if(userType && userType == "guest") {%>
+      <a
+        href="/homes"
+        class="rounded-xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-rose-50 hover:text-[#FF5A5F]"
+        >Home</a
+      >
+      <a
+        href="/favorite"
+        class="rounded-xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-rose-50 hover:text-[#FF5A5F]"
+        >Favorites</a
+      >
+      <a
+        href="/bookings"
+        class="rounded-xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-rose-50 hover:text-[#FF5A5F]"
+        >Bookings</a
+      >
+      <% }else{ %>
+      <a
+        href="/host/host-home-list"
+        class="rounded-xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-rose-50 hover:text-[#FF5A5F]"
+        >Host List</a
+      >
+      <a
+        href="/host/add-home/?editing=false"
+        class="rounded-xl px-4 py-3 text-base font-semibold text-gray-700 hover:bg-rose-50 hover:text-[#FF5A5F]"
+        >Add Home</a
+      >
+      <% } %>
+      <div class="h-px bg-gray-150 my-1 mx-2"></div>
+      <% } %>
+      <% if(isLoggedIn) {%>
+      <form action="/logout" method="POST">
+        <button
+          type="submit"
+          class="rounded-xl mt-1 border-2 border-black px-4 py-3 text-center text-base font-bold text-black hover:bg-gray-100"
+        >
+          Logout
+        </button>
+      </form>
+      <%}else{%>
+      <a
+        href="/login"
+        class="rounded-xl mt-1 border-2 border-black px-4 py-3 text-center text-base font-bold text-black hover:bg-gray-100"
+      >
+        Login
+      </a>
+      <% } %>
+    </div>
+  </div>
+</header>
+
+<script>
+  const mobileBtn = document.getElementById("mobile-menu-btn");
+  if (mobileBtn) {
+    mobileBtn.addEventListener("click", function () {
+      const menu = document.getElementById("mobile-menu");
+      const path = document.getElementById("menu-icon-path");
+      if (menu.classList.contains("hidden")) {
+        menu.classList.remove("hidden");
+        // Change to X icon
+        path.setAttribute("d", "M6 18L18 6M6 6l12 12");
+      } else {
+        menu.classList.add("hidden");
+        // Change back to hamburger
+        path.setAttribute("d", "M4 6h16M4 12h16M4 18h16");
+      }
+    });
+  }
+</script>

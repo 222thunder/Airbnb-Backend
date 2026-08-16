@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      <%= typeof home !== 'undefined' && home.houseName ? home.houseName :
+      'HomeDetails' %> -Airbnb
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="/output.css" rel="stylesheet" />
+  </head>
+  <body
+    class="flex min-h-screen flex-col bg-linear-to-br from-rose-50 via-white to-rose-100 font-sans"
+  >
+    <%- include('../partials/nav') %>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-7xl mx-auto w-full px-6 py-8">
+      <!-- Back Link -->
+      <div class="mb-6">
+        <a
+          href="/homes"
+          class="inline-flex items-center text-sm font-semibold text-gray-600 hover:text-[#FF5A5F] transition-colors gap-2"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            ></path>
+          </svg>
+          Back to Homes
+        </a>
+      </div>
+
+      <!-- Title & Location Header -->
+      <section class="mb-6">
+        <h1
+          class="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight"
+        >
+          <%= typeof home !== 'undefined' && home.houseName ? home.houseName :
+          'Hotel Name' %>
+        </h1>
+        <div
+          class="mt-2 flex flex-wrap items-center gap-4 text-sm text-gray-600"
+        >
+          <div class="flex items-center font-semibold text-gray-900">
+            <svg
+              class="h-4 w-4 text-amber-500 mr-1"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+              />
+            </svg>
+            <span
+              ><%= typeof home !== 'undefined' && home.houseRating ? home.houseRating : '4.95' %></span
+            >
+            <span class="ml-1 text-gray-500 font-normal">(48 reviews)</span>
+          </div>
+          <span>•</span>
+          <div class="flex items-center font-medium">
+            <svg
+              class="w-4 h-4 mr-1 text-rose-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+            </svg>
+            <%= typeof home !== 'undefined' && home.houseLocation ? home.houseLocation : 'California, USA' %>
+          </div>
+        </div>
+      </section>
+
+      <!-- Photo Gallery Section -->
+      <section
+        class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10 overflow-hidden rounded-2xl shadow-md border border-gray-200"
+      >
+        <!-- Main Image -->
+        <div
+          class="md:col-span-2 aspect-4/3 md:aspect-auto h-full min-h-75 overflow-hidden bg-rose-100"
+        >
+          <img
+            src="<%= typeof home !== 'undefined' && home.photo ? home.photo : 'https://images.pexels.com/photos/16047313/pexels-photo-16047313.jpeg' %>"
+            alt="<%= typeof home !== 'undefined' && home.houseName ? home.houseName : 'Home Image' %>"
+            class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+          />
+        </div>
+        <!-- Secondary Grid Images -->
+        <div class="hidden md:grid md:col-span-2 grid-cols-2 gap-4">
+          <div class="aspect-square bg-rose-200 overflow-hidden">
+            <img
+              src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg"
+              alt="Living Room"
+              class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+            />
+          </div>
+          <div class="aspect-square bg-rose-200 overflow-hidden">
+            <img
+              src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg"
+              alt="Bedroom"
+              class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+            />
+          </div>
+          <div class="aspect-square bg-rose-200 overflow-hidden">
+            <img
+              src="https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg"
+              alt="Kitchen"
+              class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+            />
+          </div>
+          <div class="aspect-square bg-rose-200 overflow-hidden">
+            <img
+              src="https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg"
+              alt="Patio View"
+              class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Details & Booking Sidebar Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <!-- Left Column: Details -->
+        <div class="lg:col-span-2 space-y-8">
+          <!-- Quick Specs -->
+          <div
+            class="pb-6 border-b border-gray-200 flex justify-between items-center"
+          >
+            <div>
+              <h2 class="text-xl font-bold text-gray-900">
+                Entire villa hosted by Airbnb Host
+              </h2>
+              <p class="text-sm text-gray-500 mt-1">
+                4 guests • 2 bedrooms • 2 beds • 2 baths
+              </p>
+            </div>
+            <div
+              class="w-12 h-12 rounded-full bg-[#FF5A5F] text-white flex items-center justify-center font-bold text-lg shadow-sm"
+            >
+              H
+            </div>
+          </div>
+
+          <!-- Highlight Badges -->
+          <div class="space-y-4 pb-6 border-b border-gray-200">
+            <div class="flex items-start gap-4">
+              <div class="p-2 rounded-lg bg-rose-50 text-rose-500">
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Dedicated workspace</h3>
+                <p class="text-sm text-gray-500">
+                  A common area with wifi that’s well-suited for working.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="p-2 rounded-lg bg-rose-50 text-rose-500">
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">
+                  Free cancellation for 48 hours
+                </h3>
+                <p class="text-sm text-gray-500">
+                  Get a full refund if you change your mind.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Extended Description Section -->
+          <div class="pb-8 border-b border-gray-200 space-y-4">
+            <h2
+              class="text-2xl font-bold text-gray-900 font-['Syne'] tracking-tight"
+            >
+              About this space
+            </h2>
+            <% if (typeof home !== 'undefined' && home.houseDescription) { %>
+            <p class="text-gray-600 leading-relaxed text-base">
+              <%= home.houseDescription %>
+            </p>
+            <% } else { %>
+            <p class="text-gray-600 leading-relaxed text-base">
+              Welcome to
+              <span class="font-semibold text-gray-900"
+                ><%= typeof home !== 'undefined' && home.houseName ?
+                home.houseName : 'this stunning home' %></span
+              >, an architectural gem located in the heart of
+              <span class="font-semibold text-gray-900"
+                ><%= typeof home !== 'undefined' && home.houseLocation ?
+                home.houseLocation : 'a prime area' %></span
+              >. Designed for guests who appreciate clean lines, natural light,
+              and refined finishes, this property offers a peaceful sanctuary
+              from the noise of daily life.
+            </p>
+            <p class="text-gray-600 leading-relaxed text-base">
+              Step inside to discover an open-concept living area featuring
+              floor-to-ceiling glass windows, high ceilings, and custom hardwood
+              flooring. The chef-inspired kitchen comes fully equipped with
+              premium appliances, custom cabinetry, and a spacious dining island
+              perfect for morning coffee or evening dinner conversations.
+            </p>
+            <% } %>
+
+            <div class="pt-2">
+              <h3 class="text-lg font-bold text-gray-900 font-['Syne'] mb-2">
+                The Sleeping Quarters
+              </h3>
+              <p class="text-gray-600 leading-relaxed text-base">
+                Each bedroom is furnished with plush mattresses,
+                400-thread-count Egyptian cotton linens, ambient lighting, and
+                blackout shades to ensure a restful night’s sleep. The ensuite
+                bathrooms offer rainfall showerheads and luxury organic
+                toiletries.
+              </p>
+            </div>
+
+            <div class="pt-2">
+              <h3 class="text-lg font-bold text-gray-900 font-['Syne'] mb-2">
+                Neighborhood & Location
+              </h3>
+              <p class="text-gray-600 leading-relaxed text-base">
+                Situated in one of the most vibrant yet serene pockets of <%=
+                typeof home !== 'undefined' && home.houseLocation ?
+                home.houseLocation : 'the city' %>, you are just minutes away
+                from boutique cafes, world-class restaurants, art galleries, and
+                scenic green spaces.
+              </p>
+            </div>
+          </div>
+
+          <!-- What this place offers (Amenities) -->
+          <div>
+            <h2 class="text-xl font-bold text-gray-900 mb-4">
+              What this place offers
+            </h2>
+            <div class="grid grid-cols-2 gap-4 text-gray-700">
+              <div class="flex items-center gap-3">
+                <svg
+                  class="w-5 h-5 text-gray-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071a10 10 0 0114.142 0"
+                  />
+                </svg>
+                <span>Fast Wifi</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg
+                  class="w-5 h-5 text-gray-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"
+                  />
+                </svg>
+                <span>Free parking on premises</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg
+                  class="w-5 h-5 text-gray-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+                <span>HDTV with Netflix</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg
+                  class="w-5 h-5 text-gray-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"
+                  />
+                </svg>
+                <span>Air conditioning</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Featured Guest Review -->
+          <div class="pt-6 border-t border-gray-200 space-y-4">
+            <h2
+              class="text-2xl font-bold text-gray-900 font-['Syne'] tracking-tight"
+            >
+              Guest Impressions
+            </h2>
+            <div
+              class="p-6 rounded-2xl bg-rose-50/60 border border-rose-100 space-y-3"
+            >
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-10 h-10 rounded-full bg-rose-500 text-white font-bold flex items-center justify-center font-['Syne'] text-sm"
+                >
+                  S
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-900 text-sm">Sarah M.</h4>
+                  <p class="text-xs text-gray-500">
+                    Stayed last month • Verified Guest
+                  </p>
+                </div>
+                <div
+                  class="ml-auto flex items-center text-amber-500 text-sm font-bold"
+                >
+                  ★ 5.0
+                </div>
+              </div>
+              <blockquote
+                class="text-gray-700 italic font-['Playfair_Display'] text-base leading-relaxed"
+              >
+                "Absolute perfection! The architectural layout, lightning-fast
+                internet, and peaceful ambiance made our stay unforgettable.
+                <%=
+                typeof home !== 'undefined' && home.houseName ? home.houseName :
+                'This home' %>
+                exceeded all expectations."
+              </blockquote>
+            </div>
+          </div>
+
+          <!-- House Rules & Policies -->
+          <div class="pt-6 border-t border-gray-200 space-y-4">
+            <h2
+              class="text-2xl font-bold text-gray-900 font-['Syne'] tracking-tight"
+            >
+              Things to know
+            </h2>
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-600"
+            >
+              <div class="p-4 rounded-xl bg-gray-50 border border-gray-150">
+                <h4 class="font-bold text-gray-900 font-['Syne'] mb-1">
+                  House Rules
+                </h4>
+                <ul class="space-y-1 text-xs text-gray-600">
+                  <li>• Check-in after 3:00 PM</li>
+                  <li>• Checkout before 11:00 AM</li>
+                  <li>• 4 guests maximum</li>
+                  <li>• No indoor smoking</li>
+                </ul>
+              </div>
+              <div class="p-4 rounded-xl bg-gray-50 border border-gray-150">
+                <h4 class="font-bold text-gray-900 font-['Syne'] mb-1">
+                  Safety & Property
+                </h4>
+                <ul class="space-y-1 text-xs text-gray-600">
+                  <li>• Smoke detector installed</li>
+                  <li>• Carbon monoxide alarm</li>
+                  <li>• Self check-in via smart lock</li>
+                  <li>• Free cancellation for 48 hours</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Booking Card -->
+        <div class="lg:col-span-1">
+          <div
+            class="sticky top-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-xl space-y-6"
+          >
+            <div class="flex justify-between items-baseline">
+              <div>
+                <span class="text-3xl font-extrabold text-gray-900">
+                  $<%= typeof home !== 'undefined' && home.housePrice ?
+                  home.housePrice : '150' %>
+                </span>
+                <span class="text-gray-500 text-sm"> / night</span>
+              </div>
+              <div
+                class="flex items-center text-sm font-semibold text-gray-900"
+              >
+                <svg
+                  class="h-4 w-4 text-amber-500 mr-1"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  />
+                </svg>
+                <span
+                  ><%= typeof home !== 'undefined' && home.houseRating ? home.houseRating : '4.95' %></span
+                >
+              </div>
+            </div>
+
+            <!-- Booking Inputs Form -->
+            <form class="space-y-4">
+              <div
+                class="rounded-lg border border-gray-300 overflow-hidden divide-y divide-gray-300"
+              >
+                <div class="grid grid-cols-2 divide-x divide-gray-300">
+                  <div class="p-2.5">
+                    <label
+                      class="block text-[10px] font-extrabold uppercase tracking-wider text-gray-700"
+                      >Check-in</label
+                    >
+                    <input
+                      type="date"
+                      class="w-full text-xs text-gray-800 focus:outline-none"
+                    />
+                  </div>
+                  <div class="p-2.5">
+                    <label
+                      class="block text-[10px] font-extrabold uppercase tracking-wider text-gray-700"
+                      >Checkout</label
+                    >
+                    <input
+                      type="date"
+                      class="w-full text-xs text-gray-800 focus:outline-none"
+                    />
+                  </div>
+                </div>
+                <div class="p-2.5">
+                  <label
+                    class="block text-[10px] font-extrabold uppercase tracking-wider text-gray-700"
+                    >Guests</label
+                  >
+                  <select
+                    class="w-full text-xs text-gray-800 focus:outline-none bg-transparent"
+                  >
+                    <option>1 guest</option>
+                    <option selected>2 guests</option>
+                    <option>3 guests</option>
+                    <option>4 guests</option>
+                  </select>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="w-full rounded-xl bg-[#FF5A5F] py-3.5 text-center text-sm font-bold text-white shadow-md transition hover:bg-[#e54e52] active:scale-98 cursor-pointer"
+              >
+                Reserve Now
+              </button>
+            </form>
+
+            <!-- Add / Remove Favorites Form -->
+            <% const favStatus = typeof isFavorite !== 'undefined' && isFavorite; %>
+            <form
+              action="<%= favStatus ? '/favorite/remove' : '/favorite/add' %>"
+              method="POST"
+            >
+              <input
+                type="hidden"
+                name="homeId"
+                value="<%= typeof home !== 'undefined' ? home._id  : '' %>"
+              />
+              <button
+                type="submit"
+                class="w-full flex items-center justify-center gap-2 rounded-xl py-3 text-center text-sm font-bold transition active:scale-98 cursor-pointer <%= favStatus ? 'bg-rose-500 text-white shadow-md hover:bg-rose-600' : 'border border-rose-200 bg-rose-50/80 text-rose-600 hover:bg-rose-100 hover:border-rose-300' %>"
+              >
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  />
+                </svg>
+                <%= favStatus ? 'Remove from Favorites' : 'Add to Favorites' %>
+              </button>
+            </form>
+
+            <p class="text-center text-xs text-gray-400">
+              You won't be charged yet
+            </p>
+
+            <!-- Pricing Breakdown -->
+            <div
+              class="space-y-3 pt-3 border-t border-gray-200 text-sm text-gray-600"
+            >
+              <div class="flex justify-between">
+                <span
+                  >$<%= typeof home !== 'undefined' && home.housePrice ? home.housePrice : '150' %>
+                  x 5 nights</span
+                >
+                <span
+                  >$<%= (typeof home !== 'undefined' && home.housePrice ? Number(home.housePrice) : 150) * 5 %></span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span>Cleaning fee</span>
+                <span>$50</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Airbnb service fee</span>
+                <span>$40</span>
+              </div>
+              <div
+                class="flex justify-between pt-3 border-t border-gray-200 font-bold text-gray-900 text-base"
+              >
+                <span>Total before taxes</span>
+                <span
+                  >$<%= (typeof home !== 'undefined' && home.housePrice ? Number(home.housePrice) : 150) * 5 + 90 %></span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-150 mt-auto py-8">
+      <div
+        class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500 gap-4"
+      >
+        <div>
+          &copy;
+          <%= new Date().getFullYear() %>
+          Airbnb, Inc.
+        </div>
+        <div class="flex gap-6">
+          <a href="#" class="hover:underline">Privacy</a>
+          <a href="#" class="hover:underline">Terms</a>
+          <a href="#" class="hover:underline">Sitemap</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

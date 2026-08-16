@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Airbnb Home</title>
+    <link href="/output.css" rel="stylesheet" />
+  </head>
+
+  <body
+    class="flex min-h-screen flex-col bg-linear-to-br from-rose-50 via-white to-rose-100 font-sans"
+  >
+    <%- include('../partials/nav') %>
+
+    <!-- Main Content -->
+    <main class="flex flex-1 flex-col">
+      <!-- Hero Section -->
+      <section
+        class="flex flex-col items-center text-center py-16 px-6 max-w-3xl mx-auto w-full"
+      >
+        <h1
+          class="text-5xl font-extrabold tracking-tight text-gray-900 md:text-6xl"
+        >
+          Here are your Registered <span class="text-[#FF5A5F]">Homes</span>
+        </h1>
+      </section>
+
+      <!-- Listings Section -->
+      <section class="py-12 max-w-7xl mx-auto w-full px-6 flex-1">
+        <h2
+          class="text-3xl font-extrabold text-gray-900 text-left mb-8 tracking-tight border-b border-gray-100 pb-4 md:text-4xl"
+        >
+          Registered homes
+        </h2>
+
+        <% if (registeredHomes.length === 0) { %>
+        <!-- Empty State -->
+        <div
+          class="mt-8 flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-rose-250 bg-white/50 p-12 text-center backdrop-blur-xs"
+        >
+          <div
+            class="flex h-16 w-16 items-center justify-center rounded-full bg-rose-100 text-rose-500"
+          >
+            <svg
+              class="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+              />
+            </svg>
+          </div>
+          <h3 class="mt-4 text-xl font-bold text-gray-900">
+            No registered homes yet
+          </h3>
+          <p class="mt-2 max-w-sm text-sm text-gray-500">
+            Be the first to list your place and start hosting guests from around
+            the globe.
+          </p>
+          <a
+            href="/host/add-home"
+            class="mt-6 rounded-full bg-[#FF5A5F] px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-[#e54e52] active:scale-95"
+          >
+            List your home
+          </a>
+        </div>
+        <% } else { %>
+        <!-- Grid of Registered Homes -->
+        <div
+          class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-xs mx-auto sm:max-w-none"
+        >
+          <% registeredHomes.forEach((home) => { %>
+          <a
+            href="/homes/<%= home._id  %>"
+            class="group block overflow-hidden rounded-2xl border border-gray-150 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-md"
+          >
+            <div class="flex flex-col">
+              <!-- Image Placeholder Area -->
+              <div
+                class="relative aspect-square w-full overflow-hidden bg-linear-to-br from-rose-100 to-rose-200"
+              >
+                <img
+                  src="<%= home.photo %>"
+                  alt="<%= home.houseName %>"
+                  class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <%- include('../partials/fav-btn', { home: home }) %>
+              </div>
+
+              <!-- Card Body -->
+              <div class="flex flex-1 flex-col p-4 text-left">
+                <div class="flex items-center justify-between gap-2">
+                  <h3 class="truncate pr-2 text-base font-bold text-gray-900">
+                    <%= home.houseName %>
+                  </h3>
+                  <div
+                    class="flex shrink-0 items-center text-sm font-semibold text-gray-900"
+                  >
+                    <svg
+                      class="mr-0.5 h-4 w-4 text-amber-500"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                      />
+                    </svg>
+                    <span><%= home.houseRating %></span>
+                  </div>
+                </div>
+                <p class="mt-1 text-sm text-gray-500">Entire home</p>
+                <p class="text-xs text-gray-400">Listed by local host</p>
+
+                <div
+                  class="mt-auto flex items-center justify-between border-t border-gray-150 pt-3"
+                >
+                  <p class="text-sm font-semibold text-gray-900">
+                    <%= home.housePrice %> $
+                    <span class="font-normal text-gray-500">/ night</span>
+                  </p>
+                  <span
+                    class="rounded-lg bg-[#FF5A5F] px-3.5 py-1.5 text-xs font-semibold text-white shadow-xs transition hover:bg-[#e54e52] active:scale-95"
+                  >
+                    Book
+                  </span>
+                </div>
+              </div>
+            </div>
+          </a>
+          <% }) %>
+        </div>
+        <% } %>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-150 mt-auto py-8">
+      <div
+        class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500 gap-4"
+      >
+        <div>
+          &copy;
+          <%= new Date().getFullYear() %>
+          Airbnb, Inc.
+        </div>
+        <div class="flex gap-6">
+          <a href="#" class="hover:underline">Privacy</a>
+          <a href="#" class="hover:underline">Terms</a>
+          <a href="#" class="hover:underline">Sitemap</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

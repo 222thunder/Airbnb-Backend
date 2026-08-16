@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      <%= typeof pageTitle !== 'undefined' ? pageTitle : 'Login - Airbnb' %>
+    </title>
+    <link href="/output.css" rel="stylesheet" />
+  </head>
+  <body
+    class="flex min-h-screen flex-col bg-linear-to-br from-rose-50 via-white to-rose-100 font-sans"
+  >
+    <%- include('../partials/nav') %>
+
+    <main class="flex flex-1 items-center justify-center px-6 py-12">
+      <div
+        class="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl border border-gray-100 transition-all duration-300"
+      >
+        <!-- Header -->
+        <div class="text-center mb-6">
+          <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">
+            Welcome Back
+          </h1>
+          <p class="mt-2 text-sm text-gray-500">
+            Log in to manage your bookings and listings
+          </p>
+        </div>
+
+        <!-- Warning / Error Message Banner -->
+        <% if (typeof errorMessage !== 'undefined' && errorMessage &&
+        (Array.isArray(errorMessage) ? errorMessage.length > 0 : true)) { %>
+        <div
+          class="mb-6 rounded-xl border border-rose-200 bg-rose-50/90 p-4 text-sm text-rose-900 shadow-xs"
+          role="alert"
+        >
+          <div class="flex items-start gap-3">
+            <svg
+              class="h-5 w-5 shrink-0 text-[#FF5A5F] mt-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+            <div class="flex-1">
+              <% if (Array.isArray(errorMessage)) { %>
+              <ul class="list-disc list-inside space-y-1 text-xs text-rose-800">
+                <% errorMessage.forEach(function(msg) { %>
+                <li><%= msg %></li>
+                <% }); %>
+              </ul>
+              <% } else { %>
+              <p class="text-xs text-rose-800 font-medium">
+                <%= errorMessage %>
+              </p>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <% } %>
+
+        <!-- Login Form -->
+        <form action="/login" method="POST" class="flex flex-col gap-4">
+          <!-- Email / Username Input -->
+          <div>
+            <label
+              for="email"
+              class="block text-sm font-medium text-gray-700 mb-1.5"
+            >
+              Email address
+            </label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              value="<%= typeof oldInput !== 'undefined' && oldInput.email ? oldInput.email : '' %>"
+              required
+              placeholder="name@example.com"
+              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-[#FF5A5F] focus:outline-none focus:ring-2 focus:ring-[#FF5A5F]/30 transition-all"
+            />
+          </div>
+
+          <!-- Password Input -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label
+                for="password"
+                class="block text-sm font-medium text-gray-700"
+              >
+                Password
+              </label>
+            </div>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              required
+              placeholder="••••••••"
+              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-[#FF5A5F] focus:outline-none focus:ring-2 focus:ring-[#FF5A5F]/30 transition-all"
+            />
+          </div>
+
+          <!-- Remember Me -->
+          <div class="flex items-center justify-between pt-1">
+            <label
+              class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer select-none"
+            >
+              <input
+                type="checkbox"
+                name="remember"
+                class="h-4 w-4 rounded border-gray-300 text-[#FF5A5F] focus:ring-[#FF5A5F] accent-[#FF5A5F]"
+              />
+              <span>Remember me</span>
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="mt-2 w-full cursor-pointer rounded-lg bg-[#FF5A5F] px-4 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-[#e54e52] hover:shadow-lg active:scale-98"
+          >
+            Log in
+          </button>
+        </form>
+
+        <!-- Divider -->
+        <div class="relative my-6">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-200"></div>
+          </div>
+          <div class="relative flex justify-center text-xs uppercase">
+            <span class="bg-white px-2 text-gray-400 font-medium">or</span>
+          </div>
+        </div>
+
+        <!-- Sign up Link -->
+        <p class="text-center text-sm text-gray-500">
+          Don't have an account?
+          <a
+            href="/signup"
+            class="font-semibold text-[#FF5A5F] hover:underline"
+          >
+            Sign up
+          </a>
+        </p>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-150 mt-auto py-8">
+      <div
+        class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500 gap-4"
+      >
+        <div>
+          &copy;
+          <%= new Date().getFullYear() %>
+          Airbnb, Inc.
+        </div>
+        <div class="flex gap-6">
+          <a href="#" class="hover:underline">Privacy</a>
+          <a href="#" class="hover:underline">Terms</a>
+          <a href="#" class="hover:underline">Sitemap</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
